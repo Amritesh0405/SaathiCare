@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { BookingService } from '../../services/booking';
@@ -12,38 +12,47 @@ import { AuthService } from '../../services/auth';
 })
 export class Dashboard implements OnInit {
   activeTab = 'bookings';
-  user: any;
+  user: any = {};
   bookings: any[] = [];
-  loading = false;
+  loading = true;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private bookingService: BookingService
-  ) {
-    this.user = this.authService.getUser();
-  }
+    private bookingService: BookingService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
+    this.user = this.authService.getUser() || {};
+
+    if (this.user?.role === 'admin') {
+      this.router.navigate(['/admin']);
+      return;
+    }
+
     this.loadBookings();
   }
 
   loadBookings() {
     this.loading = true;
     this.bookingService.getUserBookings().subscribe({
-      next: (res) => {
-        this.bookings = res.bookings;
+      next: (res: any) => {
+        this.bookings = res.bookings || [];
         this.loading = false;
+        this.cdr.detectChanges();
       },
-      error: () => {
+      error: (err: any) => {
+        this.bookings = [];
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
 
   extendBooking(booking: any) {
     this.bookingService.extendBooking(booking._id).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         booking.hours = res.booking.hours;
         booking.totalAmount = res.booking.totalAmount;
         alert(`✅ Extended! New total: ₹${res.booking.totalAmount}`);

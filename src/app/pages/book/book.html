@@ -36,14 +36,12 @@
       <div class="step-content" *ngIf="step === 1">
         <h2>What do you need help with?</h2>
         <div class="services-grid">
-          <div class="service-option"
-            *ngFor="let s of services"
-            [class.selected]="booking.service === s.id"
-            (click)="selectService(s.id)">
+          <div class="service-option" *ngFor="let s of services" [class.selected]="booking.service === s.name"
+            (click)="selectService(s)">
             <div class="service-icon">{{ s.icon }}</div>
             <h3>{{ s.name }}</h3>
             <p>{{ s.desc }}</p>
-            <div class="check" *ngIf="booking.service === s.id">✓</div>
+            <div class="check" *ngIf="booking.service === s.name">✓</div>
           </div>
         </div>
       </div>

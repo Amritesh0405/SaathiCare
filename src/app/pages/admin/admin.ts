@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SAMPLE_BOOKINGS, HELPERS } from '../../constants/data';
+import { AdminService } from '../../services/admin';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-admin',
@@ -10,27 +11,71 @@ import { SAMPLE_BOOKINGS, HELPERS } from '../../constants/data';
   templateUrl: './admin.html',
   styleUrl: './admin.css'
 })
-export class Admin {
+export class Admin implements OnInit {
   activeTab = 'dashboard';
-  bookings = SAMPLE_BOOKINGS;
-  helpers = HELPERS;
+  bookings: any[] = [];
+  users: any[] = [];
+  helpers: any[] = [];  
+  loading = false;
 
   stats = {
-    totalBookings: 3,
-    todayBookings: 1,
-    totalHelpers: 6,
-    activeHelpers: 5,
-    totalRevenue: 1050,
-    todayRevenue: 300
+    totalBookings: 0,
+    totalUsers: 0,
+    totalHelpers: 0,
+    pendingBookings: 0,
+    totalRevenue: 0
   };
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private adminService: AdminService
+  ) {}
 
-  logout() {
-    this.router.navigate(['/']);
+  ngOnInit() {
+    this.loadStats();
+    this.loadBookings();
+    this.loadUsers();
+  }
+
+  loadStats() {
+    this.adminService.getStats().subscribe({
+      next: (res) => this.stats = res,
+      error: (err) => console.error(err)
+    });
+  }
+
+  loadBookings() {
+    this.loading = true;
+    this.adminService.getAllBookings().subscribe({
+      next: (res) => {
+        this.bookings = res.bookings;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      }
+    });
+  }
+
+  loadUsers() {
+    this.adminService.getUsers().subscribe({
+      next: (res) => this.users = res.users,
+      error: (err) => console.error(err)
+    });
   }
 
   updateStatus(booking: any, status: string) {
-    booking.status = status;
+    this.adminService.updateBookingStatus(booking._id, status).subscribe({
+      next: (res) => {
+        booking.status = status;
+      },
+      error: () => alert('Failed to update status!')
+    });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

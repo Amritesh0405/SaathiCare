@@ -26,7 +26,12 @@ export class BookingService {
   }
 
   getUserBookings(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this.getHeaders() });
+    return this.http.get(this.apiUrl, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.authService.getToken()}`,
+        'Cache-Control': 'no-cache'
+      })
+    });
   }
 
   getAllBookings(): Observable<any> {

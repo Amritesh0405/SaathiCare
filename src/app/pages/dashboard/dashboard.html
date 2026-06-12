@@ -1,111 +1,105 @@
 <div class="dashboard">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <h2>🤝 SaathiCare</h2>
-      </div>
-      <nav class="sidebar-nav">
-        <a (click)="activeTab='bookings'"
-          [class.active]="activeTab==='bookings'">
-          📋 My Bookings
-        </a>
-        <a (click)="activeTab='profile'"
-          [class.active]="activeTab==='profile'">
-          👤 My Profile
-        </a>
-        <a routerLink="/book" class="book-link">
-          ➕ New Booking
-        </a>
-      </nav>
-      <button class="btn-logout" (click)="logout()">
-        🚪 Logout
-      </button>
-    </aside>
-  
-    <!-- MAIN -->
-    <main class="main-content">
-  
-      <!-- BOOKINGS TAB -->
-      <div *ngIf="activeTab === 'bookings'">
-        <div class="page-header">
-          <h2>My Bookings</h2>
-          <a routerLink="/book" class="btn-new">+ New Booking</a>
-        </div>
-  
-        <div class="bookings-list">
-            <div class="booking-card" *ngFor="let b of bookings">
-                <div class="booking-left">
-                  <div class="booking-icon">{{ b.serviceIcon || '🤝' }}</div>
-                  <div class="booking-info">
-                    <h4>{{ b.service }}</h4>
-                    <p>📅 {{ b.date }} at {{ b.time }}</p>
-                    <p>⏰ {{ b.hours }} hrs • 💰 ₹{{ b.totalAmount }}</p>
-                    <p>🚗 {{ b.hasVehicle ? 'My vehicle' : 'Auto arranged' }}</p>
-              
-                    <!-- OTP for upcoming bookings -->
-                    <div class="otp-section" *ngIf="b.status === 'upcoming' || b.status === 'pending'">
-                      <p class="otp-label">🔐 Share this OTP with helper:</p>
-                      <div class="otp-code">{{ b.otp }}</div>
-                      <small>Valid only when helper arrives</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="booking-right">
-                  <span class="status-badge" [ngClass]="b.status">{{ b.status }}</span>
-                  <div class="booking-amount">₹{{ b.totalAmount }}</div>
-                  <button class="btn-extend"
-                    *ngIf="b.status === 'upcoming' || b.status === 'pending'"
-                    (click)="extendBooking(b)">
-                    ⏰ Extend +1hr (₹150)
-                  </button>
-                </div>
-              </div>
-              
-              <div class="loading" *ngIf="loading">
-                <p>Loading bookings...</p>
-              </div>
-              
-              <div class="empty-state"
-                *ngIf="!loading && bookings.length === 0">
-                <p>📭 No bookings yet</p>
-                <a routerLink="/book" class="btn-new">Book a Companion</a>
-              </div>
-  
-          <div class="empty-state" *ngIf="bookings.length === 0">
-            <p>📭 No bookings yet</p>
-            <a routerLink="/book" class="btn-new">Book a Companion</a>
-          </div>
-        </div>
-      </div>
-  
-      <!-- PROFILE TAB -->
-      <div *ngIf="activeTab === 'profile'">
-        <div class="page-header">
-          <h2>My Profile</h2>
-        </div>
-        <div class="profile-card">
-          <div class="profile-avatar">👤</div>
-          <div class="profile-details">
-            <div class="profile-row">
-              <label>Name</label>
-              <span>{{ user.name }}</span>
-            </div>
-            <div class="profile-row">
-              <label>Phone</label>
-              <span>{{ user.phone }}</span>
-            </div>
-            <div class="profile-row">
-              <label>City</label>
-              <span>{{ user.city }}</span>
-            </div>
-            <div class="profile-row">
-              <label>Member Since</label>
-              <span>June 2024</span>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-    </main>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>🤝 SaathiCare</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a (click)="activeTab='bookings'" [class.active]="activeTab==='bookings'">
+        📋 My Bookings
+      </a>
+      <a (click)="activeTab='profile'" [class.active]="activeTab==='profile'">
+        👤 My Profile
+      </a>
+      <a routerLink="/book" class="book-link">
+        ➕ New Booking
+      </a>
+    </nav>
+    <button class="btn-logout" (click)="logout()">
+      🚪 Logout
+    </button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+   <!-- BOOKINGS TAB -->
+<div *ngIf="activeTab === 'bookings'">
+  <div class="page-header">
+    <h2>My Bookings</h2>
+    <a routerLink="/book" class="btn-new">+ New Booking</a>
   </div>
+
+  <!-- LOADING -->
+  <div class="loading" *ngIf="loading">
+    <p>Loading bookings...</p>
+  </div>
+
+  <!-- BOOKINGS LIST -->
+  <div class="bookings-list" *ngIf="!loading">
+    <div class="booking-card" *ngFor="let b of bookings">
+      <div class="booking-left">
+        <div class="booking-icon">{{ b.serviceIcon || '🤝' }}</div>
+        <div class="booking-info">
+          <h4>{{ b.service }}</h4>
+          <p>📅 {{ b.date }} at {{ b.time }}</p>
+          <p>⏰ {{ b.hours }} hrs • 💰 ₹{{ b.totalAmount }}</p>
+          <p>🚗 {{ b.hasVehicle ? 'My vehicle' : 'Auto arranged' }}</p>
+          <div class="otp-section"
+            *ngIf="b.status === 'upcoming' || b.status === 'pending'">
+            <p class="otp-label">🔐 Share this OTP with helper:</p>
+            <div class="otp-code">{{ b.otp }}</div>
+            <small>Valid only when helper arrives</small>
+          </div>
+        </div>
+      </div>
+      <div class="booking-right">
+        <span class="status-badge" [ngClass]="b.status">{{ b.status }}</span>
+        <div class="booking-amount">₹{{ b.totalAmount }}</div>
+        <button class="btn-extend"
+          *ngIf="b.status === 'upcoming' || b.status === 'pending'"
+          (click)="extendBooking(b)">
+          ⏰ Extend +1hr (₹150)
+        </button>
+      </div>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" *ngIf="bookings.length === 0">
+      <p>📭 No bookings yet</p>
+      <a routerLink="/book" class="btn-new">Book a Companion</a>
+    </div>
+  </div>
+</div>
+
+    <!-- PROFILE TAB -->
+    <div *ngIf="activeTab === 'profile'">
+      <div class="page-header">
+        <h2>My Profile</h2>
+      </div>
+      <div class="profile-card">
+        <div class="profile-avatar">👤</div>
+        <div class="profile-details">
+          <div class="profile-row">
+            <label>Name</label>
+            <span>{{ user.name }}</span>
+          </div>
+          <div class="profile-row">
+            <label>Phone</label>
+            <span>{{ user.phone }}</span>
+          </div>
+          <div class="profile-row">
+            <label>City</label>
+            <span>{{ user.city }}</span>
+          </div>
+          <div class="profile-row">
+            <label>Member Since</label>
+            <span>June 2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
