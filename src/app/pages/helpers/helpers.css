@@ -1,0 +1,241 @@
+.helpers-page {
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* HERO */
+  .helpers-hero {
+    background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  
+  .helpers-hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+  
+  .helpers-hero p {
+    color: #b7e4c7;
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+  
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .hero-badges span {
+    background: #ffffff20;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    color: white;
+  }
+  
+  /* CONTENT */
+  .helpers-content {
+    padding: 50px 40px;
+    background: #f9fafb;
+  }
+  
+  /* GRID */
+  .helpers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* HELPER CARD */
+  .helper-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    position: relative;
+    transition: transform 0.2s;
+  }
+  
+  .helper-card:hover { transform: translateY(-4px); }
+  
+  .availability-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  
+  .availability-badge.available {
+    background: #d8f3dc;
+    color: #1b4332;
+  }
+  
+  .availability-badge.busy {
+    background: #fde8e8;
+    color: #c0392b;
+  }
+  
+  .helper-avatar {
+    font-size: 4rem;
+    margin-bottom: 12px;
+  }
+  
+  .helper-card h3 {
+    font-size: 1.1rem;
+    color: #1b4332;
+    margin-bottom: 4px;
+  }
+  
+  .helper-meta {
+    color: #777;
+    font-size: 0.82rem;
+    margin-bottom: 10px;
+  }
+  
+  .helper-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  
+  .stars {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1b4332;
+  }
+  
+  .reviews {
+    font-size: 0.78rem;
+    color: #777;
+  }
+  
+  .helper-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  
+  .skill-tag {
+    background: #d8f3dc;
+    color: #1b4332;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .helper-languages {
+    font-size: 0.78rem;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  
+  .lang-label { font-weight: 600; }
+  
+  .verified-badge {
+    font-size: 0.78rem;
+    color: #2d6a4f;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  .btn-book {
+    display: block;
+    padding: 10px 20px;
+    background: #2d6a4f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  
+  .btn-book:hover { background: #1b4332; }
+  
+  .btn-book.disabled {
+    background: #ccc;
+    pointer-events: none;
+  }
+  
+  /* BECOME HELPER */
+  .become-helper {
+    padding: 60px 40px;
+    background: #1b4332;
+    color: white;
+    text-align: center;
+  }
+  
+  .become-helper h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .become-helper p {
+    color: #b7e4c7;
+    margin-bottom: 32px;
+  }
+  
+  .become-perks {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  
+  .perk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .perk span { font-size: 2rem; }
+  
+  .perk p {
+    color: #b7e4c7;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+  
+  .btn-apply {
+    display: inline-block;
+    padding: 14px 32px;
+    background: #f5a623;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+  
+  .btn-apply:hover { background: #e09000; }
+  
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .helpers-hero { padding: 40px 20px; }
+    .helpers-hero h1 { font-size: 1.6rem; }
+    .helpers-content { padding: 32px 16px; }
+    .helpers-grid { grid-template-columns: 1fr 1fr; }
+    .become-helper { padding: 40px 20px; }
+    .become-perks { gap: 20px; }
+  }
+  
+  @media (max-width: 480px) {
+    .helpers-grid { grid-template-columns: 1fr; }
+  }

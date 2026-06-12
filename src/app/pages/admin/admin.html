@@ -1,0 +1,168 @@
+<div class="admin">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>🤝 SaathiCare</h2>
+        <span class="admin-badge">Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a (click)="activeTab='dashboard'"
+          [class.active]="activeTab==='dashboard'">
+          📊 Dashboard
+        </a>
+        <a (click)="activeTab='bookings'"
+          [class.active]="activeTab==='bookings'">
+          📋 All Bookings
+        </a>
+        <a (click)="activeTab='helpers'"
+          [class.active]="activeTab==='helpers'">
+          👥 Helpers
+        </a>
+      </nav>
+      <button class="btn-logout" (click)="logout()">
+        🚪 Logout
+      </button>
+    </aside>
+  
+    <!-- MAIN -->
+    <main class="main-content">
+  
+      <!-- DASHBOARD TAB -->
+      <div *ngIf="activeTab === 'dashboard'">
+        <h2>Dashboard Overview</h2>
+        <p class="subtitle">Welcome back, Admin!</p>
+  
+        <div class="stats-grid">
+          <div class="stat-card green">
+            <div class="stat-icon">📋</div>
+            <div class="stat-info">
+              <h3>{{ stats.totalBookings }}</h3>
+              <p>Total Bookings</p>
+            </div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-icon">📅</div>
+            <div class="stat-info">
+              <h3>{{ stats.todayBookings }}</h3>
+              <p>Today's Bookings</p>
+            </div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+              <h3>{{ stats.activeHelpers }}/{{ stats.totalHelpers }}</h3>
+              <p>Active Helpers</p>
+            </div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+              <h3>₹{{ stats.totalRevenue }}</h3>
+              <p>Total Revenue</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- RECENT BOOKINGS -->
+        <div class="section">
+          <h3>Recent Bookings</h3>
+          <div class="bookings-table">
+            <div class="table-header">
+              <span>ID</span>
+              <span>Service</span>
+              <span>Helper</span>
+              <span>Date</span>
+              <span>Amount</span>
+              <span>Status</span>
+            </div>
+            <div class="table-row" *ngFor="let b of bookings">
+              <span class="booking-id">{{ b.id }}</span>
+              <span>{{ b.icon }} {{ b.service }}</span>
+              <span>{{ b.helper }}</span>
+              <span>{{ b.date }}</span>
+              <span>₹{{ b.amount }}</span>
+              <span>
+                <select [(ngModel)]="b.status"
+                  class="status-select"
+                  [ngClass]="b.status"
+                  (change)="updateStatus(b, b.status)">
+                  <option value="pending">Pending</option>
+                  <option value="upcoming">Upcoming</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- BOOKINGS TAB -->
+      <div *ngIf="activeTab === 'bookings'">
+        <h2>All Bookings</h2>
+        <p class="subtitle">Manage and update booking status</p>
+  
+        <div class="bookings-list">
+          <div class="booking-card" *ngFor="let b of bookings">
+            <div class="booking-left">
+              <div class="booking-icon">{{ b.icon }}</div>
+              <div class="booking-info">
+                <h4>{{ b.service }}</h4>
+                <p>📅 {{ b.date }} at {{ b.time }}</p>
+                <p>⏰ {{ b.hours }} hrs • 💰 ₹{{ b.amount }}</p>
+                <p>👤 Helper: {{ b.helper }}</p>
+                <p>🚗 {{ b.hasVehicle ? 'Own vehicle' : 'Auto needed' }}</p>
+              </div>
+            </div>
+            <div class="booking-right">
+              <span class="booking-id-badge">{{ b.id }}</span>
+              <select [(ngModel)]="b.status"
+                class="status-select"
+                [ngClass]="b.status">
+                <option value="pending">Pending</option>
+                <option value="upcoming">Upcoming</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <div class="booking-amount">₹{{ b.amount }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- HELPERS TAB -->
+      <div *ngIf="activeTab === 'helpers'">
+        <h2>Our Helpers</h2>
+        <p class="subtitle">Manage verified helpers</p>
+  
+        <div class="helpers-grid">
+          <div class="helper-card" *ngFor="let h of helpers">
+            <div class="helper-top">
+              <div class="helper-avatar">{{ h.avatar }}</div>
+              <div class="helper-info">
+                <h4>{{ h.name }}</h4>
+                <p>{{ h.age }} yrs • {{ h.experience }}</p>
+                <div class="rating">⭐ {{ h.rating }} ({{ h.reviews }})</div>
+              </div>
+              <div class="helper-status"
+                [class.active]="h.available"
+                [class.busy]="!h.available">
+                {{ h.available ? '🟢 Active' : '🔴 Busy' }}
+              </div>
+            </div>
+            <div class="helper-skills">
+              <span *ngFor="let s of h.skills" class="skill-tag">{{ s }}</span>
+            </div>
+            <div class="helper-actions">
+              <button class="btn-block"
+                (click)="h.available = !h.available">
+                {{ h.available ? 'Mark Busy' : 'Mark Active' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </main>
+  </div>

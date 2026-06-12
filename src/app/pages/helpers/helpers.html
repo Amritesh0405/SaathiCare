@@ -1,0 +1,94 @@
+<div class="helpers-page">
+
+    <!-- HERO -->
+    <div class="helpers-hero">
+      <h1>Our Verified Helpers</h1>
+      <p>Background checked, Aadhar verified and personally trained by SaathiCare</p>
+      <div class="hero-badges">
+        <span>✅ Aadhar Verified</span>
+        <span>🔍 Background Checked</span>
+        <span>🎓 SaathiCare Trained</span>
+        <span>⭐ Rated by Families</span>
+      </div>
+    </div>
+  
+    <!-- HELPERS GRID -->
+    <div class="helpers-content">
+      <div class="helpers-grid">
+        <div class="helper-card" *ngFor="let h of helpers">
+  
+          <!-- AVAILABLE BADGE -->
+          <div class="availability-badge"
+            [class.available]="h.available"
+            [class.busy]="!h.available">
+            {{ h.available ? '🟢 Available' : '🔴 Busy' }}
+          </div>
+  
+          <!-- AVATAR -->
+          <div class="helper-avatar">{{ h.avatar }}</div>
+  
+          <!-- INFO -->
+          <h3>{{ h.name }}</h3>
+          <p class="helper-meta">{{ h.age }} yrs • {{ h.experience }} exp</p>
+  
+          <!-- RATING -->
+          <div class="helper-rating">
+            <span class="stars">⭐ {{ h.rating }}</span>
+            <span class="reviews">({{ h.reviews }} reviews)</span>
+          </div>
+  
+          <!-- SKILLS -->
+          <div class="helper-skills">
+            <span *ngFor="let skill of h.skills" class="skill-tag">
+              {{ skill }}
+            </span>
+          </div>
+  
+          <!-- LANGUAGES -->
+          <div class="helper-languages">
+            <span class="lang-label">🗣️ Languages:</span>
+            <span>{{ h.languages.join(', ') }}</span>
+          </div>
+  
+          <!-- VERIFIED -->
+          <div class="verified-badge" *ngIf="h.verified">
+            ✅ Verified & Trained
+          </div>
+  
+          <!-- BOOK -->
+          <a routerLink="/book"
+            class="btn-book"
+            [class.disabled]="!h.available">
+            {{ h.available ? 'Book Now' : 'Currently Busy' }}
+          </a>
+  
+        </div>
+      </div>
+    </div>
+  
+    <!-- BECOME HELPER -->
+    <div class="become-helper">
+      <h2>Want to Become a SaathiCare Helper?</h2>
+      <p>Earn ₹120-200/hr helping families in Jamshedpur</p>
+      <div class="become-perks">
+        <div class="perk">
+          <span>💰</span>
+          <p>Earn ₹5,000-15,000/month</p>
+        </div>
+        <div class="perk">
+          <span>⏰</span>
+          <p>Flexible working hours</p>
+        </div>
+        <div class="perk">
+          <span>🏠</span>
+          <p>Work near your home</p>
+        </div>
+        <div class="perk">
+          <span>🎓</span>
+          <p>Free training provided</p>
+        </div>
+      </div>
+      <a routerLink="/register" class="btn-apply">Apply to be a Helper →</a>
+    </div>
+  
+  </div>

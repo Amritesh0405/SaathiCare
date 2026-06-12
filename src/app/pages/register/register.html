@@ -1,0 +1,55 @@
+<div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>🤝 SaathiCare</h2>
+        <p>Create your account</p>
+      </div>
+  
+      <!-- ROLE SELECTOR -->
+      <div class="role-selector">
+        <button [class.active]="form.role === 'user'"
+          (click)="form.role = 'user'" type="button">
+          👤 I need help
+        </button>
+        <button [class.active]="form.role === 'helper'"
+          (click)="form.role = 'helper'" type="button">
+          🤝 I want to help
+        </button>
+      </div>
+  
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" [(ngModel)]="form.name"
+            name="name" placeholder="Your full name" required />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" [(ngModel)]="form.phone"
+            name="phone" placeholder="+91 98765 43210" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="form.password"
+            name="password" placeholder="Min 6 characters" required />
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" [(ngModel)]="form.confirmPassword"
+            name="confirmPassword" placeholder="Repeat password" required />
+        </div>
+  
+        <div class="error" *ngIf="errorMsg">{{ errorMsg }}</div>
+        <div class="success" *ngIf="successMsg">{{ successMsg }}</div>
+  
+        <button type="submit" class="btn-submit" [disabled]="loading">
+          {{ loading ? 'Creating...' : form.role === 'helper' ? 'Apply as Helper' : 'Create Account' }}
+        </button>
+      </form>
+  
+      <p class="auth-link">
+        Already have an account?
+        <a routerLink="/login">Login here</a>
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,30 @@
+<nav class="navbar">
+    <a routerLink="/" class="navbar-brand">
+      🤝 SaathiCare
+    </a>
+  
+    <button class="hamburger" (click)="toggleMenu()">
+      {{ menuOpen ? '✕' : '☰' }}
+    </button>
+  
+    <ul class="navbar-links" [class.open]="menuOpen">
+      <li><a routerLink="/" routerLinkActive="active" (click)="menuOpen=false">Home</a></li>
+      <li><a routerLink="/helpers" routerLinkActive="active" (click)="menuOpen=false">Our Helpers</a></li>
+      <li><a routerLink="/book" routerLinkActive="active" (click)="menuOpen=false">Book Now</a></li>
+    </ul>
+  
+    <div class="navbar-auth">
+      <!-- Not logged in -->
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="btn-login">Login</a>
+        <a routerLink="/register" class="btn-register">Register</a>
+      </ng-container>
+    
+      <!-- Logged in -->
+      <ng-container *ngIf="isLoggedIn">
+        <span class="user-greeting">👋 {{ user?.name }}</span>
+        <a routerLink="/dashboard" class="btn-login">Dashboard</a>
+        <button class="btn-logout-nav" (click)="logout()">Logout</button>
+      </ng-container>
+    </div>
+  </nav>

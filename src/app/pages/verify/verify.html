@@ -1,0 +1,101 @@
+<div class="verify-page">
+    <div class="verify-card">
+
+        <!-- HEADER -->
+        <div class="verify-header">
+            <h2>🤝 SaathiCare</h2>
+            <p>Helper Work Verification</p>
+        </div>
+
+        <!-- IDLE — Enter OTP -->
+        <div *ngIf="status === 'idle'">
+            <div class="info-box">
+                <p>📋 Ask the user for their <strong>Booking ID & OTP</strong> shown on their dashboard</p>
+            </div>
+
+            <div class="form-group">
+                <label>Booking ID</label>
+                <input type="text" [(ngModel)]="form.bookingId" placeholder="e.g. SC002"
+                    style="text-transform: uppercase" />
+            </div>
+
+            <div class="form-group">
+                <label>OTP (from user's phone/dashboard)</label>
+                <input type="text" [(ngModel)]="form.otp" placeholder="4-digit OTP" maxlength="4" />
+            </div>
+
+            <div class="error" *ngIf="errorMsg">
+                ❌ {{ errorMsg }}
+            </div>
+
+            <button class="btn-verify" (click)="verify()" [disabled]="!form.bookingId || !form.otp">
+                ✅ Verify & Start Work
+            </button>
+        </div>
+
+        <!-- WORKING -->
+        <div *ngIf="status === 'working'" class="working-screen">
+            <div class="work-badge">🟢 Work In Progress</div>
+
+            <div class="booking-details">
+                <div class="detail-row">
+                    <span>Service</span>
+                    <strong>{{ booking.icon }} {{ booking.service }}</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Booked Hours</span>
+                    <strong>{{ booking.hours }} hrs</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Started At</span>
+                    <strong>{{ startTime | date:'hh:mm a' }}</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Time Elapsed</span>
+                    <strong class="elapsed">{{ elapsedMinutes }} min</strong>
+                </div>
+            </div>
+
+            <div class="timer-display">
+                ⏱️ {{ elapsedMinutes }} min elapsed
+            </div>
+
+            <button class="btn-end" (click)="endWork()">
+                🔴 End Work
+            </button>
+
+            <p class="extend-note">
+                💡 To extend, ask user to approve extension on their dashboard
+            </p>
+        </div>
+
+        <!-- DONE -->
+        <div *ngIf="status === 'done'" class="done-screen">
+            <div class="done-icon">✅</div>
+            <h3>Work Completed!</h3>
+            <p>Thank you for helping!</p>
+
+            <div class="summary-box">
+                <div class="detail-row">
+                    <span>Service</span>
+                    <strong>{{ booking.service }}</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Duration</span>
+                    <strong>{{ elapsedTime }}</strong>
+                </div>
+                <div class="detail-row">
+                    <span>Your Earnings</span>
+                    <strong class="earnings">
+                        ₹{{ booking.hours * 120 }}
+                    </strong>
+                </div>
+            </div>
+
+            <p class="payment-note">
+                💰 Payment will be transferred within 24 hours
+            </p>
+        </div>
+
+    </div>
+</div>

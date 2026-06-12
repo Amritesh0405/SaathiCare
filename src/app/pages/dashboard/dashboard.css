@@ -1,0 +1,326 @@
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: #f4f6fb;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* SIDEBAR */
+  .sidebar {
+    width: 240px;
+    background: #1b4332;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+  }
+  
+  .sidebar-header {
+    padding: 24px 20px;
+    border-bottom: 1px solid #ffffff20;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 1.2rem;
+    color: #f5a623;
+  }
+  
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+    flex: 1;
+  }
+  
+  .sidebar-nav a {
+    padding: 14px 20px;
+    color: #b7e4c7;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+  }
+  
+  .sidebar-nav a:hover,
+  .sidebar-nav a.active {
+    background: #ffffff15;
+    color: white;
+    border-left-color: #f5a623;
+  }
+  
+  .sidebar-nav .book-link {
+    margin-top: 8px;
+    color: #f5a623;
+  }
+  
+  .btn-logout {
+    margin: 16px;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #ffffff30;
+    color: #b7e4c7;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  
+  .btn-logout:hover {
+    background: #ff4444;
+    border-color: #ff4444;
+    color: white;
+  }
+  
+  /* MAIN */
+  .main-content {
+    margin-left: 240px;
+    padding: 32px;
+    flex: 1;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .page-header h2 {
+    font-size: 1.6rem;
+    color: #1b4332;
+  }
+  
+  .btn-new {
+    padding: 10px 20px;
+    background: #2d6a4f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  
+  .btn-new:hover { background: #1b4332; }
+  
+  /* BOOKINGS */
+  .bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .booking-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .booking-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .booking-icon { font-size: 2.5rem; }
+  
+  .booking-info h4 {
+    font-size: 1rem;
+    color: #1b4332;
+    margin-bottom: 4px;
+  }
+  
+  .booking-info p {
+    font-size: 0.82rem;
+    color: #777;
+    margin: 2px 0;
+  }
+  
+  .booking-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  
+  .status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  .status-badge.completed { background: #d8f3dc; color: #1b4332; }
+  .status-badge.upcoming { background: #cce5ff; color: #004085; }
+  .status-badge.pending { background: #fff3cd; color: #856404; }
+  .status-badge.cancelled { background: #fde8e8; color: #c0392b; }
+  
+  .booking-amount {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1b4332;
+  }
+  
+  .booking-id {
+    font-size: 0.75rem;
+    color: #aaa;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 60px;
+    color: #aaa;
+  }
+  
+  /* PROFILE */
+  .profile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 500px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  
+  .profile-avatar {
+    font-size: 4rem;
+    flex-shrink: 0;
+  }
+  
+  .profile-details { flex: 1; }
+  
+  .profile-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+  }
+  
+  .profile-row label {
+    color: #777;
+    font-weight: 500;
+  }
+  
+  .profile-row span {
+    color: #1b4332;
+    font-weight: 600;
+  }
+  .otp-section {
+    background: #f0faf4;
+    border: 1.5px solid #2d6a4f;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+  }
+  
+  .otp-label {
+    font-size: 0.78rem;
+    color: #2d6a4f;
+    font-weight: 600;
+    margin-bottom: 6px !important;
+  }
+  
+  .otp-code {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1b4332;
+    letter-spacing: 8px;
+    margin-bottom: 4px;
+  }
+  
+  .otp-section small {
+    font-size: 0.72rem;
+    color: #777;
+  }
+  
+  .btn-extend {
+    padding: 8px 14px;
+    background: #f5a623;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    font-family: inherit;
+  }
+  
+  .btn-extend:hover { background: #e09000; }
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .dashboard { flex-direction: column; }
+  
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 12px;
+    }
+  
+    .sidebar-header {
+      width: 100%;
+      padding: 8px 12px;
+      border-bottom: none;
+    }
+  
+    .sidebar-nav {
+      flex-direction: row;
+      padding: 0;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+  
+    .sidebar-nav a {
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+    }
+  
+    .sidebar-nav a.active {
+      border-left: none;
+      border-bottom-color: #f5a623;
+    }
+  
+    .btn-logout {
+      margin: 8px;
+      padding: 8px 12px;
+      font-size: 0.78rem;
+    }
+  
+    .main-content {
+      margin-left: 0;
+      padding: 16px;
+    }
+  
+    .profile-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .profile-row {
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
+    }
+  }

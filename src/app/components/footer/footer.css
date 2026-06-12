@@ -1,0 +1,118 @@
+.footer {
+    background: #1b4332;
+    color: white;
+    padding: 60px 60px 0;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ffffff15;
+  }
+  
+  .footer-brand h3 {
+    font-size: 1.4rem;
+    color: #f5a623;
+    margin-bottom: 12px;
+  }
+  
+  .footer-brand p {
+    color: #b7e4c7;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .social-links a {
+    color: #b7e4c7;
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.2s;
+  }
+  
+  .social-links a:hover { color: #f5a623; }
+  
+  .footer-links h4,
+  .footer-contact h4 {
+    color: white;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links ul li { margin-bottom: 10px; }
+  
+  .footer-links ul li a {
+    color: #b7e4c7;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  
+  .footer-links ul li a:hover { color: #f5a623; }
+  
+  .footer-contact p {
+    color: #b7e4c7;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+  
+  .whatsapp-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 20px;
+    background: #25d366;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  
+  .whatsapp-btn:hover { background: #1da851; }
+  
+  .footer-bottom {
+    text-align: center;
+    padding: 20px;
+    color: #52b788;
+    font-size: 0.82rem;
+  }
+  
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 40px 20px 0;
+    }
+  
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+  
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+    }
+  }

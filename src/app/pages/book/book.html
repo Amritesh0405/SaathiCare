@@ -1,0 +1,208 @@
+<div class="book-page">
+
+    <!-- HEADER -->
+    <div class="book-header">
+      <h1>Book a Companion</h1>
+      <p>Verified helpers starting at ₹150/hr</p>
+  
+      <!-- PROGRESS BAR -->
+      <div class="progress-bar">
+        <div class="progress-step" [class.active]="step >= 1" [class.done]="step > 1">
+          <div class="progress-circle">{{ step > 1 ? '✓' : '1' }}</div>
+          <span>Service</span>
+        </div>
+        <div class="progress-line" [class.active]="step > 1"></div>
+        <div class="progress-step" [class.active]="step >= 2" [class.done]="step > 2">
+          <div class="progress-circle">{{ step > 2 ? '✓' : '2' }}</div>
+          <span>Vehicle</span>
+        </div>
+        <div class="progress-line" [class.active]="step > 2"></div>
+        <div class="progress-step" [class.active]="step >= 3" [class.done]="step > 3">
+          <div class="progress-circle">{{ step > 3 ? '✓' : '3' }}</div>
+          <span>Schedule</span>
+        </div>
+        <div class="progress-line" [class.active]="step > 3"></div>
+        <div class="progress-step" [class.active]="step >= 4">
+          <div class="progress-circle">4</div>
+          <span>Confirm</span>
+        </div>
+      </div>
+    </div>
+  
+    <!-- BOOKING FORM -->
+    <div class="book-content">
+  
+      <!-- STEP 1 — SELECT SERVICE -->
+      <div class="step-content" *ngIf="step === 1">
+        <h2>What do you need help with?</h2>
+        <div class="services-grid">
+          <div class="service-option"
+            *ngFor="let s of services"
+            [class.selected]="booking.service === s.id"
+            (click)="selectService(s.id)">
+            <div class="service-icon">{{ s.icon }}</div>
+            <h3>{{ s.name }}</h3>
+            <p>{{ s.desc }}</p>
+            <div class="check" *ngIf="booking.service === s.id">✓</div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- STEP 2 — VEHICLE -->
+      <div class="step-content" *ngIf="step === 2">
+        <h2>Do you have your own vehicle?</h2>
+        <p class="step-subtitle">This helps us assign the right companion</p>
+        <div class="vehicle-options">
+          <div class="vehicle-option"
+            [class.selected]="booking.hasVehicle === 'yes'"
+            (click)="booking.hasVehicle = 'yes'">
+            <div class="vehicle-icon">🚗</div>
+            <h3>Yes, I have a vehicle</h3>
+            <p>Companion will ride in <strong>your car/bike/scooty</strong> and assist you</p>
+            <div class="vehicle-price">₹150/hr only</div>
+          </div>
+          <div class="vehicle-option"
+            [class.selected]="booking.hasVehicle === 'no'"
+            (click)="booking.hasVehicle = 'no'">
+            <div class="vehicle-icon">🛺</div>
+            <h3>No, I need transport</h3>
+            <p>Companion will <strong>book an auto</strong> and accompany you. Auto fare paid separately</p>
+            <div class="vehicle-price">₹150/hr + auto fare</div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- STEP 3 — SCHEDULE -->
+     <!-- STEP 3 — SCHEDULE -->
+<div class="step-content" *ngIf="step === 3">
+    <h2>When do you need help?</h2>
+    <div class="schedule-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date"
+            [(ngModel)]="booking.date"
+            [min]="minDate" />
+        </div>
+        <div class="form-group">
+          <label>Time</label>
+          <input type="time"
+            [(ngModel)]="booking.time" />
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Number of Hours (min 1 hour)</label>
+        <div class="hours-selector">
+          <button (click)="booking.hours = booking.hours > 1 ? booking.hours - 1 : 1">−</button>
+          <span>{{ booking.hours }} hr{{ booking.hours > 1 ? 's' : '' }}</span>
+          <button (click)="booking.hours = booking.hours + 1">+</button>
+        </div>
+      </div>
+  
+      <!-- EXTENSION OPTION -->
+      <div class="extension-option">
+        <label class="toggle-label">
+          <input type="checkbox"
+            [(ngModel)]="booking.allowExtension"
+            name="allowExtension" />
+          <span class="toggle-text">
+            ⏰ Allow helper to extend work time if needed
+            <small>Helper can add 1hr at a time with your approval</small>
+          </span>
+        </label>
+      </div>
+  
+      <div class="price-preview">
+        <div class="price-row">
+          <span>Companion charge</span>
+          <span>₹{{ pricing.perHour }}/hr × {{ booking.hours }} hr{{ booking.hours > 1 ? 's' : '' }}</span>
+        </div>
+        <div class="price-row total">
+          <span>Total</span>
+          <strong>₹{{ totalPrice }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      <!-- STEP 4 — CONFIRM -->
+      <div class="step-content" *ngIf="step === 4">
+        <h2>Confirm Your Booking</h2>
+        <div class="confirm-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text"
+                [(ngModel)]="booking.name"
+                placeholder="Full name" />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel"
+                [(ngModel)]="booking.phone"
+                placeholder="+91 98765 43210" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Pickup Address</label>
+            <input type="text"
+              [(ngModel)]="booking.address"
+              placeholder="Your full address in Jamshedpur" />
+          </div>
+          <div class="form-group">
+            <label>Special Instructions (optional)</label>
+            <textarea [(ngModel)]="booking.notes"
+              placeholder="Any special requirements..."
+              rows="3"></textarea>
+          </div>
+  
+          <!-- SUMMARY -->
+          <div class="booking-summary">
+            <h3>Booking Summary</h3>
+            <div class="summary-row">
+              <span>Service</span>
+              <strong>{{ services.find(s => s.id === booking.service)?.name || booking.service }}</strong>
+            </div>
+            <div class="summary-row">
+              <span>Vehicle</span>
+              <strong>{{ booking.hasVehicle === 'yes' ? 'My own vehicle' : 'Need transport' }}</strong>
+            </div>
+            <div class="summary-row">
+              <span>Date & Time</span>
+              <strong>{{ booking.date }} at {{ booking.time }}</strong>
+            </div>
+            <div class="summary-row">
+              <span>Duration</span>
+              <strong>{{ booking.hours }} hours</strong>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <strong>₹{{ totalPrice }}</strong>
+            </div>
+          </div>
+  
+          <button class="btn-confirm" (click)="submitBooking()">
+            Confirm & Pay ₹{{ totalPrice }}
+          </button>
+          <p class="payment-note">🔒 Secure payment via Razorpay — UPI, Card, NetBanking</p>
+        </div>
+      </div>
+  
+      <!-- NAVIGATION -->
+      <div class="step-nav">
+        <button class="btn-back"
+          *ngIf="step > 1"
+          (click)="prevStep()">
+          ← Back
+        </button>
+        <button class="btn-next"
+          *ngIf="step < 4"
+          (click)="nextStep()"
+          [disabled]="!canProceed()">
+          Next →
+        </button>
+      </div>
+  
+    </div>
+  </div>
